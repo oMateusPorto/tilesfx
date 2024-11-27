@@ -77,7 +77,7 @@ ext {
 }
 
 dependencies {
-    api "eu.hansolo.fx:countries:21.0.17"
+    api "eu.hansolo.fx:countries:17.0.39"
     implementation "org.openjfx:javafx-base:${javafxVersion}:${platform}"
     implementation "org.openjfx:javafx-graphics:${javafxVersion}:${platform}"
     implementation "org.openjfx:javafx-controls:${javafxVersion}:${platform}"
@@ -155,15 +155,6 @@ artifacts {
     archives sourcesJar
 }
 
-signing {
-    if (gpgkey && gpgpassphrase) {
-        useInMemoryPgpKeys(gpgkey, gpgpassphrase)
-    }
-
-    sign configurations.archives
-    sign publishing.publications
-}
-
 // Remove 'thirdPartyCompatibility' from JavaFX runtimeElements variant
 // Otherwise it locks Gradle Module Metadata (GMM) to the publishing OS
 tasks.withType(GenerateModuleMetadata).configureEach {
@@ -184,7 +175,7 @@ tasks.withType(GenerateModuleMetadata).configureEach {
 
 publishing {
     publications {
-        mavenCustom(MavenPublication) {
+        maven(MavenPublication) {
             group      = 'eu.hansolo'
             artifactId = 'tilesfx'
             version    = "${version}"
